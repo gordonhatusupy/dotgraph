@@ -44,7 +44,7 @@
 				var xAxis = d3.svg.axis()
 					.scale(xScale)
 					.orient("bottom")
-					.ticks(10)
+					.ticks(5)
 
                 var groups = svg.selectAll('g')
                 	.data(data)
@@ -117,6 +117,14 @@
                     .attr('x', xScale(label_anchor[0].top))
                     .attr('text-anchor', 'middle')
 
+                var label_top  = svg.append('text')
+                    .text('income in %')
+                    .attr('fill', '#000')
+                    .attr('y', h - 10)
+                    .attr('x', 50)
+                    .attr('text-anchor', 'middle')
+                    .attr('opacity', 0.5)
+
 			//Create X axis
 			svg.append("g")
 				.attr("class", "axis")
@@ -127,6 +135,14 @@
               });
 
 		</script>
+            <p class="conclusion">
+                d3.js dotgraph remake by <a href="http://www.studiobrandstof.nl">Studio Brandstof</a> based on the article <a href="http://policyviz.com/a-simple-remake-for-a-simple-chart/">"A simple remake for a simple chart"</a> by <a href="https://twitter.com/jschwabish">Jon Schwabisch</a>.
+            </p>
+            <p><center>
+<a href="https://twitter.com/studiobrandstof" class="twitter-follow-button" data-show-count="false">Follow @studiobrandstof</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </center></p>
+
 
 	</body>
 </html>
