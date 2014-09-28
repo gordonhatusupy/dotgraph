@@ -15,16 +15,19 @@
 	</head>
 
 	<body>
-
+    <div class="title"><h1>Household income in EU OECD member states</h1></div>
 	<div class="dot"></div>
 		<script>
 
 		d3.csv('ftdata.csv', function(data){
 
-                console.log(data)
+
+                var label_anchor = [data[1]];
+
+                console.log(label_anchor);
 
                 var h = 600;
-                var w = 900;
+                var w = 600;
                 var padding = 50;
                 var r = 5;
 
@@ -34,7 +37,7 @@
                 .attr('width', w)
 
                 var xScale = d3.scale.linear()
-                .domain([0, 70])
+                .domain([0, 60])
                 .range([(0 + padding), (w - padding)]);
 
 			//Define X axis
@@ -93,6 +96,26 @@
                 	.attr('x', function(d){ return xScale(d.bottom) - 15 })
                 	.attr('font-size', 12)
                 	.attr('text-anchor', 'end')
+
+                var label_bottom  = svg.append('text')
+                    .text('Bottom 20%')
+                    .attr('fill', 'lightblue')
+                    .attr('y', 25)
+                    .attr('x', xScale(label_anchor[0].bottom))
+                    .attr('text-anchor', 'middle')
+
+                var label_avg  = svg.append('text')
+                    .text('Average')
+                    .attr('fill', '#00aeef')
+                    .attr('y', 25)
+                    .attr('x', xScale(label_anchor[0].income))
+
+                var label_top  = svg.append('text')
+                    .text('Top 20%')
+                    .attr('fill', '#000')
+                    .attr('y', 25)
+                    .attr('x', xScale(label_anchor[0].top))
+                    .attr('text-anchor', 'middle')
 
 			//Create X axis
 			svg.append("g")
