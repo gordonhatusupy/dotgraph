@@ -1,0 +1,32 @@
+		body{
+  			font-family: "Helvetica Neue", "Helvetica";
+  			font-weight: bold;
+			margin: 0;
+			font-size: 12px;
+
+		}
+
+		.dot{
+			margin-top:50px;
+			display: block;
+			width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: gray;
+			shape-rendering: crispEdges;
+		}
+		svg{
+/*			background-color:#fafafa;
+*/		}
+
+		text{
+			font-size:12px;
+		}
+		circle{
+			stroke: #222;
+			stroke-width:2px;
+		}

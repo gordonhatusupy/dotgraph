@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Dotgraph in d3.js</title>
+
+  <meta name="keywords" content="Dotgraph, d3" /> 
+  <meta name="description" content="Dotgraph in d3.js" /> 
+  <meta name="author" content="Gordon Hatusupy">
+
+	<script type="text/javascript" src="js/d3.v3.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+	</head>
+
+	<body>
+
+	<div class="dot"></div>
+		<script>
+
+		d3.csv('ftdata.csv', function(data){
+
+                console.log(data)
+
+                var h = 600;
+                var w = 900;
+                var padding = 50;
+                var r = 5;
+
+                var svg = d3.select('.dot')
+                .append('svg')
+                .attr('height', h)
+                .attr('width', w)
+
+                var xScale = d3.scale.linear()
+                .domain([0, 70])
+                .range([(0 + padding), (w - padding)]);
+
+			//Define X axis
+				var xAxis = d3.svg.axis()
+					.scale(xScale)
+					.orient("bottom")
+					.ticks(10)
+
+                var groups = svg.selectAll('g')
+                	.data(data)
+                	.enter()
+                	.append('g')
+                	.attr('transform', function(d, i){
+                		return "translate(" + 0 + "," + ((i * 24) + padding) + ")";
+                	})
+
+                var groupline = groups.append('line')
+                	.attr('x1', function(d){ return xScale(d.bottom)})
+                	.attr('y1', 0)
+                	.attr('x2', function(d){ return xScale(d.top)})
+                	.attr('y2', 0)
+                	.style('stroke', '#e5e5e4')
+                	.attr('stroke-width', 1)
+
+                var bottom_line = groups.append('line')
+                    
+
+                var bottom = groups.append('circle')
+                	.attr('r', r)
+                	.attr('fill', 'lightblue')
+                	.attr('cx', function(d){ return xScale(d.bottom) })
+
+                var top = groups.append('circle')
+                	.attr('r', r)
+                    .attr('fill', '#222')
+                	.attr('cx', function(d){ return xScale(d.top)})
+
+                var avg = groups.append('circle')
+                	.attr('r', r)
+                	.attr('fill', 
+                			function(d){
+                				if(d.country == "UK"){
+                					return "orange"
+                				}
+                				else{
+                					return "#00aeef"
+                				}
+                			}
+                		)
+                	.attr('cx', function(d){ return xScale(d.income)})
+
+                var labels = groups.append('text')
+                	.text(function(d){ return d.country })
+                	.attr('class', 'label')
+                	.attr('y', 4)
+                	.attr('x', function(d){ return xScale(d.bottom) - 15 })
+                	.attr('font-size', 12)
+                	.attr('text-anchor', 'end')
+
+			//Create X axis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(0," + (h - padding) + ")")
+				.call(xAxis);
+
+                
+              });
+
+		</script>
+
+	</body>
+</html>
