@@ -92,7 +92,17 @@
                 var labels = groups.append('text')
                 	.text(function(d){ return d.country })
                 	.attr('class', 'label')
-                	.attr('y', 4)
+                    .attr('fill', 
+                            function(d){
+                                if(d.country == "UK"){
+                                    return "orange"
+                                }
+                                else{
+                                    return "#222"
+                                }
+                            }
+                        )                	
+                    .attr('y', 4)
                 	.attr('x', function(d){ return xScale(d.bottom) - 15 })
                 	.attr('font-size', 12)
                 	.attr('text-anchor', 'end')
